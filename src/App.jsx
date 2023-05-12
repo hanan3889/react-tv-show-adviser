@@ -7,8 +7,10 @@ import s from "./style.module.css";
 import { BACKDROP_BASE_URL } from "./config";
 import logo from "./assets/images/logo.png";
 import { TVShowListItem } from "./components/TVShowListItem/TVShowListItem";
+
 export function App() {
     const [currentTVShow, setcurrentTVShow] = useState();
+    const [recommendationList, setRecommendationList] = useState([]);
 
     async function fetchPopulars() {
         const populars = await TVShowAPI.fetchPopulars();
@@ -17,13 +19,27 @@ export function App() {
         }
     }
 
+    async function fetchRecommendations(tvShowId) {
+        const recommendations = await TVShowAPI.fetchRecommendations(tvShowId);
+        if (recommendations.length > 0) {
+            setRecommendationList(recommendations.slice(0, 10));
+        }
+    }
+
     useEffect(() => {
         fetchPopulars();
     }, []);
 
+    useEffect(() => {
+        if (currentTVShow) {
+            fetchRecommendations(currentTVShow.id);
+        }
+    }, [currentTVShow]);
+
     function setCurrentTvShowFromRecommendation(tvShow) {
         setcurrentTVShow(tvShow);
     }
+    console.log(recommendationList);
 
     return (
         <div
