@@ -8,6 +8,7 @@ import { BACKDROP_BASE_URL } from "./config";
 import logo from "./assets/images/logo.png";
 import { TVShowListItem } from "./components/TVShowListItem/TVShowListItem";
 import { TVShowList } from "./components/TVShowList/TVShowList";
+import { SearchBar } from "./components/SearchBar/SearchBar";
 
 export function App() {
     const [currentTVShow, setcurrentTVShow] = useState();
@@ -61,7 +62,7 @@ export function App() {
                         />
                     </div>
                     <div className="col-md-12 col-lg-4">
-                        <input style={{ width: "100%" }} type="text" />
+                        <SearchBar />
                     </div>
                 </div>
             </div>
