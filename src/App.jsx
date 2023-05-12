@@ -7,6 +7,7 @@ import s from "./style.module.css";
 import { BACKDROP_BASE_URL } from "./config";
 import logo from "./assets/images/logo.png";
 import { TVShowListItem } from "./components/TVShowListItem/TVShowListItem";
+import { TVShowList } from "./components/TVShowList/TVShowList";
 
 export function App() {
     const [currentTVShow, setcurrentTVShow] = useState();
@@ -68,21 +69,11 @@ export function App() {
                 {currentTVShow && <TVShowDetail tvShow={currentTVShow} />}
             </div>
             <div className={s.recommendations}>
-                {currentTVShow && (
-                    <>
-                        <TVShowListItem
-                            onClick={setCurrentTvShowFromRecommendation}
-                            tvShow={currentTVShow}
-                        />
-                        <TVShowListItem
-                            onClick={setCurrentTvShowFromRecommendation}
-                            tvShow={currentTVShow}
-                        />
-                        <TVShowListItem
-                            onClick={setCurrentTvShowFromRecommendation}
-                            tvShow={currentTVShow}
-                        />
-                    </>
+                {recommendationList && recommendationList.length > 0 && (
+                    <TVShowList
+                        onClickItem={setcurrentTVShow}
+                        TVShowList={recommendationList}
+                    />
                 )}
             </div>
         </div>
